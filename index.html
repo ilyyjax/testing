@@ -1,0 +1,168 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MakeAvatar — simple avatar maker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="brand"><span class="dot">●</span> MakeAvatar</h1>
+    <div class="actions">
+      <button id="randomBtn" class="btn">Randomize</button>
+      <button id="downloadBtn" class="btn primary">Download PNG</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="leftpane">
+      <div class="panel">
+        <h2>Face</h2>
+        <div class="controls">
+          <label>Skin
+            <input type="color" id="skinColor" value="#f2d1b3"/>
+          </label>
+          <label>Face shape
+            <select id="faceShape">
+              <option value="round">Round</option>
+              <option value="oval">Oval</option>
+              <option value="square">Square</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Hair</h2>
+        <div class="controls">
+          <label>Style
+            <select id="hairStyle">
+              <option value="short">Short</option>
+              <option value="long">Long</option>
+              <option value="bun">Bun</option>
+              <option value="bald">Bald</option>
+            </select>
+          </label>
+          <label>Color
+            <input type="color" id="hairColor" value="#2b2b2b"/>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Eyes & Mouth</h2>
+        <div class="controls">
+          <label>Eyes
+            <select id="eyeStyle">
+              <option value="normal">Normal</option>
+              <option value="happy">Happy</option>
+              <option value="sleepy">Sleepy</option>
+              <option value="sunglasses">Sunglasses</option>
+            </select>
+          </label>
+          <label>Mouth
+            <select id="mouthStyle">
+              <option value="smile">Smile</option>
+              <option value="neutral">Neutral</option>
+              <option value="open">Open</option>
+            </select>
+          </label>
+          <label>Eye color
+            <input type="color" id="eyeColor" value="#2a4d9a"/>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Clothes & Background</h2>
+        <div class="controls">
+          <label>Shirt color
+            <input type="color" id="shirtColor" value="#8fd19e"/>
+          </label>
+          <label>Background
+            <select id="bgStyle">
+              <option value="plain">Plain</option>
+              <option value="circle">Circle</option>
+              <option value="stripes">Stripes</option>
+            </select>
+          </label>
+          <label>Background color
+            <input type="color" id="bgColor" value="#ffffff"/>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Extras</h2>
+        <div class="controls">
+          <label><input type="checkbox" id="glassesToggle"> Glasses</label>
+          <label><input type="checkbox" id="beardToggle"> Beard</label>
+        </div>
+      </div>
+
+      <footer class="help">
+        Tip: use <strong>Randomize</strong> to explore styles fast.
+      </footer>
+    </section>
+
+    <section class="previewpane">
+      <div class="preview-card">
+        <div id="avatarWrap" class="avatar-wrap" title="Avatar preview">
+          <!-- Inline SVG avatar — script updates attributes -->
+          <svg id="avatarSvg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <clipPath id="faceClip">
+                <circle id="faceClipCircle" cx="200" cy="160" r="110"/>
+              </clipPath>
+            </defs>
+
+            <!-- Background -->
+            <rect id="bgRect" x="0" y="0" width="400" height="400" fill="#ffffff" />
+
+            <!-- Background decoration (circle / stripes) -->
+            <g id="bgDecor"></g>
+
+            <!-- Neck & shirt -->
+            <g id="shirtGroup">
+              <rect id="neck" x="150" y="240" width="100" height="60" rx="12" fill="#8fd19e" />
+              <path id="shirt" d="M80 320 q120 60 240 0 v60 h-240z" fill="#8fd19e"/>
+            </g>
+
+            <!-- Face -->
+            <g id="faceGroup" clip-path="url(#faceClip)">
+              <circle id="faceCircle" cx="200" cy="160" r="110" fill="#f2d1b3" />
+            </g>
+
+            <!-- Hair -->
+            <g id="hairGroup"></g>
+
+            <!-- Eyes -->
+            <g id="eyesGroup"></g>
+
+            <!-- Mouth -->
+            <g id="mouthGroup"></g>
+
+            <!-- Beard -->
+            <g id="beardGroup"></g>
+
+            <!-- Glasses -->
+            <g id="glassesGroup"></g>
+
+            <!-- label -->
+            <text x="200" y="380" text-anchor="middle" font-size="12" fill="#666">Made with MakeAvatar</text>
+          </svg>
+        </div>
+
+        <div class="preview-controls">
+          <button id="smallDownload" class="btn">Download</button>
+          <button id="resetBtn" class="btn">Reset</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
